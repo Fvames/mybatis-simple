@@ -55,9 +55,11 @@ public class DataSourceConfig {
         dataSource.setInitialSize(20);
         dataSource.setMaxWait(60000);
         dataSource.setMinIdle(1);
+        // 运行驳回时间？
         dataSource.setTimeBetweenEvictionRunsMillis(60000);
         dataSource.setMinEvictableIdleTimeMillis(300000);
         dataSource.setValidationQuery("SELECT 'x'");
+        // ?
         dataSource.setTestWhileIdle(true);
         dataSource.setTestOnBorrow(false);
         dataSource.setTestOnReturn(false);

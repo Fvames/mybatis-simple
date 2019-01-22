@@ -1,13 +1,9 @@
 package dev.lishengjie.config;
 
 import com.github.pagehelper.PageInterceptor;
-import dev.lishengjie.plugins.QueryPlugin;
-import dev.lishengjie.typeHandle.VarcharTypeHandler;
 import org.apache.ibatis.executor.loader.cglib.CglibProxyFactory;
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
@@ -42,7 +38,7 @@ public class MyBatisConfigeration {
         sqlSessionFactoryBean.setDataSource(dataSource);
         //sqlSessionFactoryBean.setTypeHandlers(new TypeHandler[]{new VarcharTypeHandler()});
         //        sqlSessionFactoryBean.setTypeHandlers(new TypeHandler[]{new TestTypeHandle()});
-        //        sqlSessionFactoryBean.setTypeHandlersPackage("com.gupao.dal.typehandles");
+        //        sqlSessionFactoryBean.setTypeHandlersPackage("dev.lishengjie.typehandle");
         //sqlSessionFactoryBean.setPlugins(new Interceptor[]{new QueryPlugin()});
         //sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor()});
 
