@@ -1,8 +1,10 @@
 package dev.lishengjie.beans;
 
-import java.util.Date;
-import java.util.List;
+import lombok.Data;
 
+import java.util.Date;
+
+@Data
 public class Blog {
     private Integer id;
 
@@ -16,85 +18,9 @@ public class Blog {
 
     private String content;
 
-    private Author author;
+    // mybatis2.0 转换查询数据时有entity参数匹配数据库列，需要处理多于数据库的情况，或者反向匹配
+    //private Author author;
 
-    private List<Posts> posts;
+    //private List<Posts> posts;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Integer getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public List<Posts> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Posts> posts) {
-        this.posts = posts;
-    }
-
-    @Override
-    public String toString() {
-        return "Blog{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", authorId=" + authorId +
-                ", content='" + content + '\'' +
-                ", author=" + author +
-                ", posts=" + posts +
-                '}';
-    }
 }
