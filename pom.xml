@@ -6,9 +6,13 @@
 
   <groupId>dev.lishengjie</groupId>
   <artifactId>mybatis-simple</artifactId>
-  <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>bak-code</module>
+    </modules>
 
-  <name>mybatis-simple</name>
+    <name>mybatis-simple</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -172,7 +176,7 @@
         <artifactId>mybatis-generator-maven-plugin</artifactId>
         <version>1.3.3</version>
         <configuration>
-          <configurationFile>${project.basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+          <configurationFile>bak-code/src/main/resources/generator/generatorConfig.xml</configurationFile>
           <overwrite>true</overwrite>
         </configuration>
       </plugin>
