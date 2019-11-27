@@ -1,6 +1,7 @@
 package dev.fvames.dao;
 
 import dev.fvames.domain.UserInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,11 +16,13 @@ public interface UserInfoMapper {
 
 	public UserInfo selectById(Long id);
 
-	public List<UserInfo> selectAll();
+	public List<UserInfo> selectAll(UserInfo userInfo);
 
 	public void insert(UserInfo userInfo);
 
 	public void update(UserInfo userInfo);
 
 	public void deleteById(Long id);
+
+	public UserInfo selectByUserNameAndPassword(@Param(value = "userName") String userName, @Param(value = "password") String password);
 }

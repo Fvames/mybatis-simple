@@ -5,12 +5,20 @@
 
 <mapper namespace="dev.fvames.dao.UserInfoMapper">
 
-    <select id="selectById" resultType="dev.fvames.domain.UserInfo">
+    <select id="selectById" resultType="UserInfo">
         select * from user_info where id = #{id}
     </select>
 
     <select id="selectAll" resultType="dev.fvames.domain.UserInfo">
-        select * from user_info;
+        select * from user_info
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+    <select id="selectByUserNameAndPassword" resultType="dev.fvames.domain.UserInfo">
+        select * from USER_INFO where USER_NAME=#{userName} and password=#{password}
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">

@@ -56,7 +56,10 @@ public class UserInfoMapperTest {
 
 	@Test
 	public void selectAll() {
-		List<UserInfo> userInfos = userInfoMapper.selectAll();
+		UserInfo userInfo = new UserInfo();
+		userInfo.setId(1L);
+
+		List<UserInfo> userInfos = userInfoMapper.selectAll(userInfo);
 		userInfos.forEach(System.out::println);
 	}
 
@@ -81,22 +84,9 @@ public class UserInfoMapperTest {
 		userInfoMapper.deleteById(40L);
 	}
 
-
-	/*public static void main(String[] args) {
-		String resource = "mybatis-config.xml";
-		SqlSession sqlSession = null;
-		try (InputStream inputStream = Resources.getResourceAsStream(resource)){
-			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			sqlSession = sqlSessionFactory.openSession();
-
-			UserInfo user = sqlSession.selectOne("UserInfoMapper.selectById", 1);
-			System.out.println(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (null != sqlSession) {
-				sqlSession.close();
-			}
-		}
-	}*/
+	@Test
+	public void selectByUserNameAndPassword() {
+		UserInfo userInfo = userInfoMapper.selectByUserNameAndPassword("test2", "aaaa");
+		System.out.println(userInfo);
+	}
 }

@@ -15,6 +15,11 @@
         <!--  开启驼峰命名  -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+    
+    <typeAliases>
+        <!--<typeAlias type="dev.fvames.domain.UserInfo" alias="UserInfo" />-->
+        <package name="dev.fvames.domain" />
+    </typeAliases>
 
     <environments default="dev">
         <environment id="test">
