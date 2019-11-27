@@ -34,6 +34,7 @@
     </environments>
 
     <mappers>
+        <mapper resource="mapper/UserInfoDaoMapper.xml" />
         <mapper resource="mapper/UserInfoMapper.xml" />
     </mappers>
 </configuration>

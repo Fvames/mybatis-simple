@@ -1,7 +1,6 @@
 package dev.fvames;
 
-import dev.fvames.dao.UserInfoDao;
-import dev.fvames.dao.impl.UserInfoDaoImpl;
+import dev.fvames.dao.UserInfoMapper;
 import dev.fvames.domain.UserInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -23,16 +22,15 @@ import java.util.List;
 
 public class UserInfoMapperTest {
 
-	public UserInfoDao userInfoDao;
-	private SqlSession sqlSession;
+	public UserInfoMapper userInfoMapper;
 
 	@Before
 	public void setUp() throws Exception {
 		String resource = "mybatis-config.xml";
 		try (InputStream inputStream = Resources.getResourceAsStream(resource)){
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			sqlSession = sqlSessionFactory.openSession();
-			this.userInfoDao = new UserInfoDaoImpl(sqlSession);
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			this.userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
 		}
 	}
 
@@ -45,20 +43,20 @@ public class UserInfoMapperTest {
 		userInfo.setEmail("sitongna@gmail.com");
 		userInfo.setSex(1);
 
-		userInfoDao.insert(userInfo);
+		userInfoMapper.insert(userInfo);
 
 		System.out.println(userInfo);
 	}
 
 	@Test
 	public void selectById() {
-		UserInfo userInfo = userInfoDao.selectById(1L);
+		UserInfo userInfo = userInfoMapper.selectById(1L);
 		System.out.println(userInfo);
 	}
 
 	@Test
 	public void selectAll() {
-		List<UserInfo> userInfos = userInfoDao.selectAll();
+		List<UserInfo> userInfos = userInfoMapper.selectAll();
 		userInfos.forEach(System.out::println);
 	}
 
@@ -72,7 +70,7 @@ public class UserInfoMapperTest {
 		userInfo.setEmail("sitongna@gmail.com");
 		userInfo.setSex(1);
 
-		userInfoDao.update(userInfo);
+		userInfoMapper.update(userInfo);
 
 		System.out.println(userInfo);
 	}
@@ -80,7 +78,7 @@ public class UserInfoMapperTest {
 	@Test
 	public void delete() {
 
-		userInfoDao.deleteById(40L);
+		userInfoMapper.deleteById(40L);
 	}
 
 
