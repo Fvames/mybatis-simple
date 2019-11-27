@@ -2,6 +2,7 @@ package dev.fvames.domain;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -11,7 +12,9 @@ import java.time.LocalDate;
  * @version 2019/11/26 11:14
  */
 @Data
-public class UserInfo {
+public class UserInfo implements Serializable {
+	private static final long serialVersionUID = -3330851033429007657L;
+
 	private Long id;
 	private String userName;
 	private Integer age;

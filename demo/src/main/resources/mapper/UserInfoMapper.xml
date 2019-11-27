@@ -4,6 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dev.fvames.dao.UserInfoMapper">
+    <!-- 开启二级缓存 -->
+    <!-- 缓存失效策略: LRU、FIFO、SOFT、WEAK;
+         刷新间隔,默认不设置;
+         引用数目,默认值 1024;
+         阻塞设置,默认 false, 没有命中时阻塞查询数据库后释放锁
+         只读设置,默认 false, 可读写时需要返回缓存对象的拷贝(通过序列化),这样会慢一些,但是安全
+    -->
+    <cache eviction="FIFO" flushInterval="6000" size="1024" blocking="" readOnly="true" />
 
     <select id="selectById" resultType="UserInfo">
         select * from user_info where id = #{id}
@@ -12,9 +20,17 @@
     <select id="selectAll" resultType="dev.fvames.domain.UserInfo">
         select * from user_info
         <where>
-            <if test="id != null">
-                id = #{id}
-            </if>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <when test="userName != null and userName.trim() !='' ">
+                    user_name = #{userName}
+                </when>
+                <otherwise>
+                    user_type = 1
+                </otherwise>
+            </choose>
         </where>
     </select>
     <select id="selectByUserNameAndPassword" resultType="dev.fvames.domain.UserInfo">

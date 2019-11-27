@@ -23,13 +23,15 @@ import java.util.List;
 public class UserInfoMapperTest {
 
 	public UserInfoMapper userInfoMapper;
+	private SqlSession sqlSession;
+	private SqlSessionFactory sqlSessionFactory;
 
 	@Before
 	public void setUp() throws Exception {
 		String resource = "mybatis-config.xml";
 		try (InputStream inputStream = Resources.getResourceAsStream(resource)){
-			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			SqlSession sqlSession = sqlSessionFactory.openSession();
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			sqlSession = sqlSessionFactory.openSession();
 			this.userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
 		}
 	}
@@ -57,7 +59,7 @@ public class UserInfoMapperTest {
 	@Test
 	public void selectAll() {
 		UserInfo userInfo = new UserInfo();
-		userInfo.setId(1L);
+		//userInfo.setId(1L);
 
 		List<UserInfo> userInfos = userInfoMapper.selectAll(userInfo);
 		userInfos.forEach(System.out::println);
@@ -89,4 +91,47 @@ public class UserInfoMapperTest {
 		UserInfo userInfo = userInfoMapper.selectByUserNameAndPassword("test2", "aaaa");
 		System.out.println(userInfo);
 	}
+
+	/**
+	 * 一级缓存
+	 * 同一 session， 同一查询语句，同样参数
+	 */
+	@Test
+	public void oneCache() {
+		// 仅执行一条sql语句
+		userInfoMapper.selectById(1L);
+		//sqlSession.clearCache();
+		userInfoMapper.selectById(1L);
+	}
+
+	/**
+	 * insert/update/delete 会清除一级缓存
+	 */
+	@Test
+	public void clearOneCacheOption() {
+		userInfoMapper.selectById(1L);
+		//insert();
+		//update();
+		delete();
+		// 缓存被清空,重新执行 sql 语句
+		userInfoMapper.selectById(1L);
+	}
+
+	/**
+	 * 二级缓存实体类需要序列化
+	 */
+	@Test
+	public void twoCache() {
+		userInfoMapper.selectById(1L);
+		sqlSession.close();
+		// 执行报错
+		//userInfoMapper.selectById(1L);
+
+		sqlSession = sqlSessionFactory.openSession();
+		userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
+
+		// Cache Hit Ratio 0.5(无全局设置时命中)
+		userInfoMapper.selectById(1L);
+	}
+
 }
