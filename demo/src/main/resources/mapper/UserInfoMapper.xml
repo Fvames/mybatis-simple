@@ -11,7 +11,24 @@
          阻塞设置,默认 false, 没有命中时阻塞查询数据库后释放锁
          只读设置,默认 false, 可读写时需要返回缓存对象的拷贝(通过序列化),这样会慢一些,但是安全
     -->
-    <cache eviction="FIFO" flushInterval="6000" size="1024" blocking="" readOnly="true" />
+    <!--<cache eviction="FIFO" flushInterval="6000" size="1024" blocking="" readOnly="true" />-->
+
+    <resultMap id="UserInfoMapper" type="UserInfo">
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="age" property="age" />
+        <result column="sex" property="sex" />
+        <result column="birthday" property="birthday" />
+        <result column="password" property="password" />
+        <result column="user_type" property="userType" />
+        <result column="enabled" property="enabled" />
+        <result column="real_name" property="realName" />
+        <result column="qq" property="qq" />
+        <result column="email" property="email" />
+        <result column="tel" property="tel" />
+        <result column="created" property="created" />
+        <result column="updated" property="updated" />
+    </resultMap>
 
     <select id="selectById" resultType="UserInfo">
         select * from user_info where id = #{id}

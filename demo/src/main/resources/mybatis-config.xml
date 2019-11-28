@@ -15,7 +15,7 @@
         <!--  开启驼峰命名  -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!--  全局开启\关闭二级缓存,此处关闭,mapper中开启的设置无效  -->
-        <setting name="cacheEnabled" value="false" />
+        <!--<setting name="cacheEnabled" value="false" />-->
     </settings>
     
     <typeAliases>
@@ -46,7 +46,8 @@
     </environments>
 
     <mappers>
-        <mapper resource="mapper/UserInfoDaoMapper.xml" />
+        <!--<mapper resource="mapper/UserInfoDaoMapper.xml" />-->
         <mapper resource="mapper/UserInfoMapper.xml" />
+        <mapper resource="mapper/OrderMapper.xml" />
     </mappers>
 </configuration>
