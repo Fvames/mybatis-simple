@@ -1,6 +1,7 @@
 package dev.fvames.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * TODO 类描述
@@ -17,6 +18,7 @@ public class Order {
 	private LocalDate updateDate;
 
 	private UserInfo userInfo;
+	private List<OrderDetail> detailList;
 
 	public Integer getId() {
 		return id;
@@ -64,6 +66,14 @@ public class Order {
 
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+	}
+
+	public List<OrderDetail> getDetailList() {
+		return detailList;
+	}
+
+	public void setDetailList(List<OrderDetail> detailList) {
+		this.detailList = detailList;
 	}
 
 	@Override

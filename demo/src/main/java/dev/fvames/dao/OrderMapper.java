@@ -13,4 +13,9 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderMapper {
 
 	Order selectOrderWithUserByOrderNumber(@Param("orderNumber") String orderNumber);
+
+	Order selectOrderWithUserAndDetailByOrderNumber(@Param("orderNumber") String orderNumber);
+
+	Order selectOrderWithUserAndDetailItemByOrderNumber(@Param("orderNumber") String orderNumber);
+
 }

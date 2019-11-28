@@ -13,32 +13,40 @@
         <result column="update_date" property="updateDate" />
 
         <!-- 嵌套查询 -->
-        <!--<association column="user_id" property="userInfo" autoMapping="true"
-                     javaType="UserInfo"
-                     select="dev.fvames.dao.UserInfoMapper.selectById">-->
+        <!--<association column="user_id" property="userInfo" autoMapping="true" javaType="UserInfo"
+                     select="dev.fvames.dao.UserInfoMapper.selectById" />
+        <collection  column="order_id"  property="detailList"  autoMapping="true" javaType="List"
+                    select="dev.fvames.dao.UserInfoMapper.selectByOrderId"/>-->
 
         <!--  关联查询  -->
-        <association column="user_id" property="userInfo" javaType="UserInfo" autoMapping="true">
-            <!--<id column="id" property="id"/>
-            <result column="user_name" property="userName"/>
-            <result column="age" property="age"/>
-            <result column="sex" property="sex"/>
-            <result column="birthday" property="birthday"/>
-            <result column="password" property="password"/>
-            <result column="user_type" property="userType"/>
-            <result column="enabled" property="enabled"/>
-            <result column="real_name" property="realName"/>
-            <result column="qq" property="qq"/>
-            <result column="email" property="email"/>
-            <result column="tel" property="tel"/>
-            <result column="created" property="created"/>
-            <result column="updated" property="updated"/>-->
-        </association>
+        <association column="user_id" property="userInfo" javaType="UserInfo" autoMapping="true" />
+        <collection property="detailList" javaType="List" ofType="dev.fvames.domain.OrderDetail" autoMapping="true" >
+            <association property="item" column="order_id" javaType="Item" autoMapping="true" />
+        </collection>
     </resultMap>
 
     <select id="selectOrderWithUserByOrderNumber" resultMap="OrderUserResultMap">
         select * from tb_order t
         left join user_info ui on ui.id=t.user_id
+        where t.order_number = #{orderNumber}
+    </select>
+
+    <select id="selectOrderWithUserAndDetailByOrderNumber" resultMap="OrderUserResultMap">
+        <!--select * from tb_order t
+        left join user_info ui on ui.id=t.user_id
+        left join order_Detail od on od.order_id=t.id
+        where t.order_number = #{orderNumber}-->
+
+        select * from tb_order t
+        where t.order_number = #{orderNumber}
+    </select>
+
+
+    <select id="selectOrderWithUserAndDetailItemByOrderNumber" resultMap="OrderUserResultMap">
+        select * from tb_order t
+        left join user_info ui on ui.id=t.user_id
+        left join order_Detail od on od.order_id=t.id
+        left join tb_item ti on ti.id=od.item_id
         where t.order_number = #{orderNumber}
     </select>
 

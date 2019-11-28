@@ -49,5 +49,6 @@
         <!--<mapper resource="mapper/UserInfoDaoMapper.xml" />-->
         <mapper resource="mapper/UserInfoMapper.xml" />
         <mapper resource="mapper/OrderMapper.xml" />
+        <mapper resource="mapper/OrderDetailMapper.xml" />
     </mappers>
 </configuration>
