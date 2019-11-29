@@ -3,7 +3,6 @@ package dev.fvames;
 import dev.fvames.dao.OrderMapper;
 import dev.fvames.domain.Order;
 import dev.fvames.domain.OrderDetail;
-import dev.fvames.domain.UserInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -45,9 +44,17 @@ public class OrderMapperTest {
 	@Test
 	public void selectOrderWithUserByOrderNumber() {
 		Order order = orderMapper.selectOrderWithUserByOrderNumber("1");
-		System.out.println(order);
-		UserInfo userInfo = order.getUserInfo();
-		System.out.println(userInfo);
+		System.out.println(order.getOrderNumber());
+
+		System.out.println("----------------");
+
+		System.out.println(order.getUserInfo().getUserName());
+		//UserInfo userInfo = order.getUserInfo();
+		//System.out.println(userInfo);
+
+		System.out.println("----------------");
+		List<OrderDetail> detailList = order.getDetailList();
+		detailList.forEach(System.out::println);
 	}
 
 	@Test

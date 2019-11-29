@@ -13,21 +13,21 @@
         <result column="update_date" property="updateDate" />
 
         <!-- 嵌套查询 -->
-        <!--<association column="user_id" property="userInfo" autoMapping="true" javaType="UserInfo"
+        <association column="user_id" property="userInfo" autoMapping="true" javaType="UserInfo"
                      select="dev.fvames.dao.UserInfoMapper.selectById" />
-        <collection  column="order_id"  property="detailList"  autoMapping="true" javaType="List"
-                    select="dev.fvames.dao.UserInfoMapper.selectByOrderId"/>-->
+        <collection  column="id"  property="detailList"  autoMapping="true" javaType="List" ofType="OrderDetail"
+                    select="dev.fvames.dao.OrderDetailMapper.selectByOrderId"/>
 
         <!--  关联查询  -->
-        <association column="user_id" property="userInfo" javaType="UserInfo" autoMapping="true" />
+        <!--<association column="user_id" property="userInfo" javaType="UserInfo" autoMapping="true" />
         <collection property="detailList" javaType="List" ofType="dev.fvames.domain.OrderDetail" autoMapping="true" >
             <association property="item" column="order_id" javaType="Item" autoMapping="true" />
-        </collection>
+        </collection>-->
     </resultMap>
 
     <select id="selectOrderWithUserByOrderNumber" resultMap="OrderUserResultMap">
         select * from tb_order t
-        left join user_info ui on ui.id=t.user_id
+        <!--left join user_info ui on ui.id=t.user_id-->
         where t.order_number = #{orderNumber}
     </select>
 
