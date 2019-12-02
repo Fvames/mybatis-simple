@@ -47,6 +47,13 @@ public class OrderDetailMapperTest {
 	@Test
 	public void selectByOrderId() {
 
+		OrderDetail orderDetail = orderDetailMapper.selectByOrderId(1L);
+		LOGGER.debug(orderDetail.toString());
+	}
+
+	@Test
+	public void selectById() {
+
 		OrderDetail orderDetail = orderDetailMapper.selectById(1L);
 		LOGGER.debug(orderDetail.toString());
 	}

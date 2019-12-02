@@ -29,9 +29,9 @@
         where order_id = #{orderId}
     </select>
 
-    <select id="selectById" resultMap="OrderDetailResultMap">
+    <!--<select id="selectById" resultMap="OrderDetailResultMap">
         select * from order_detail where id = #{id}
-    </select>
+    </select>-->
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="Item">
         insert into order_detail(
