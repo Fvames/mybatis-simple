@@ -5,7 +5,7 @@
 
 <mapper namespace="dev.fvames.dao.OrderMapper">
 
-    <resultMap id="OrderUserResultMap" type="Order" autoMapping="true">
+    <resultMap id="OrderUserResultMapOfNested" type="Order" autoMapping="true">
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
         <result column="order_number" property="orderNumber" />
@@ -16,33 +16,31 @@
         <association column="user_id" property="userInfo" autoMapping="true" javaType="UserInfo"
                      select="dev.fvames.dao.UserInfoMapper.selectById" />
         <collection  column="id"  property="detailList"  autoMapping="true" javaType="List" ofType="OrderDetail"
-                    select="dev.fvames.dao.OrderDetailMapper.selectByOrderId"/>
-
-        <!--  关联查询  -->
-        <!--<association column="user_id" property="userInfo" javaType="UserInfo" autoMapping="true" />
-        <collection property="detailList" javaType="List" ofType="dev.fvames.domain.OrderDetail" autoMapping="true" >
-            <association property="item" column="order_id" javaType="Item" autoMapping="true" />
-        </collection>-->
+                    select="dev.fvames.dao.OrderDetailMapper.selectByOrderId">
+        </collection>
     </resultMap>
 
-    <select id="selectOrderWithUserByOrderNumber" resultMap="OrderUserResultMap">
+
+    <resultMap id="OrderUserResultMapOfAssociation" type="Order" autoMapping="true">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+
+        <!--  嵌套结果  -->
+        <association column="user_id" property="userInfo" javaType="UserInfo" autoMapping="true" />
+        <collection property="detailList" javaType="List" ofType="dev.fvames.domain.OrderDetail" autoMapping="true" >
+            <association property="item" column="order_id" javaType="Item" autoMapping="true" />
+        </collection>
+    </resultMap>
+
+    <select id="selectOrderWithUserAndDetailItemByOrderNumberOfNested" resultMap="OrderUserResultMapOfNested">
         select * from tb_order t
-        <!--left join user_info ui on ui.id=t.user_id-->
         where t.order_number = #{orderNumber}
     </select>
 
-    <select id="selectOrderWithUserAndDetailByOrderNumber" resultMap="OrderUserResultMap">
-        <!--select * from tb_order t
-        left join user_info ui on ui.id=t.user_id
-        left join order_Detail od on od.order_id=t.id
-        where t.order_number = #{orderNumber}-->
-
-        select * from tb_order t
-        where t.order_number = #{orderNumber}
-    </select>
-
-
-    <select id="selectOrderWithUserAndDetailItemByOrderNumber" resultMap="OrderUserResultMap">
+    <select id="selectOrderWithUserAndDetailItemByOrderNumberOfAssociation" resultMap="OrderUserResultMapOfAssociation">
         select * from tb_order t
         left join user_info ui on ui.id=t.user_id
         left join order_Detail od on od.order_id=t.id

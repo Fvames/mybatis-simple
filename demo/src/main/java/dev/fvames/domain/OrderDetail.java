@@ -12,6 +12,7 @@ public class OrderDetail {
 	private Integer orderId;
 	private Double totalPrice;
 	private Integer status;
+	private Integer itemId;
 	private Item item;
 
 	public Integer getId() {
@@ -54,6 +55,14 @@ public class OrderDetail {
 		this.item = item;
 	}
 
+	public Integer getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDetail{" +
@@ -61,6 +70,7 @@ public class OrderDetail {
 				", orderId=" + orderId +
 				", totalPrice=" + totalPrice +
 				", status=" + status +
+				", itemId=" + itemId +
 				", item=" + item +
 				'}';
 	}

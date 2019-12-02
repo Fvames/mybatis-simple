@@ -16,8 +16,10 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!--  全局开启\关闭二级缓存,此处关闭,mapper中开启的设置无效  -->
         <!--<setting name="cacheEnabled" value="false" />-->
+        <!--  开启延迟加载  -->
         <setting name="lazyLoadingEnabled" value="true" />
-        <setting name="aggressiveLazyLoading" value="true" />
+        <!--  获取任意属性值时都会加载其他延迟属性  -->
+        <setting name="aggressiveLazyLoading" value="false" />
     </settings>
     
     <typeAliases>

@@ -42,34 +42,27 @@ public class OrderMapperTest {
 	}
 
 	@Test
-	public void selectOrderWithUserByOrderNumber() {
-		Order order = orderMapper.selectOrderWithUserByOrderNumber("1");
+	public void selectOrderWithUserAndDetailItemByOrderNumberOfNested() {
+		Order order = orderMapper.selectOrderWithUserAndDetailItemByOrderNumberOfNested("1");
 		System.out.println(order.getOrderNumber());
-
 		System.out.println("----------------");
 
-		System.out.println(order.getUserInfo().getUserName());
+		//System.out.println(order.getUserInfo().getUserName());
 		//UserInfo userInfo = order.getUserInfo();
 		//System.out.println(userInfo);
 
-		System.out.println("----------------");
+		//System.out.println("----------------");
 		List<OrderDetail> detailList = order.getDetailList();
+		System.out.println(detailList.get(0).getItem());
 		detailList.forEach(System.out::println);
 	}
 
 	@Test
-	public void selectOrderWithUserAndDetailByOrderNumber() {
-		Order order = orderMapper.selectOrderWithUserAndDetailByOrderNumber("1");
+	public void selectOrderWithUserAndDetailItemByOrderNumberOfAssociation() {
+		Order order = orderMapper.selectOrderWithUserAndDetailItemByOrderNumberOfAssociation("1");
 		System.out.println(order);
 		List<OrderDetail> detailList = order.getDetailList();
-		detailList.forEach(System.out::println);
-	}
-
-	@Test
-	public void selectOrderWithUserAndDetailItemByOrderNumber() {
-		Order order = orderMapper.selectOrderWithUserAndDetailItemByOrderNumber("1");
-		System.out.println(order);
-		List<OrderDetail> detailList = order.getDetailList();
+		System.out.println(detailList.get(0).getItem());
 		detailList.forEach(System.out::println);
 	}
 
