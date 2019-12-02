@@ -27,6 +27,10 @@
         <package name="dev.fvames.domain" />
     </typeAliases>
 
+    <typeHandlers>
+        <typeHandler handler="dev.fvames.typehandlers.ItemTypeHandler" />
+    </typeHandlers>
+
     <environments default="dev">
         <environment id="test">
             <transactionManager type="JDBC"></transactionManager>
@@ -54,5 +58,6 @@
         <mapper resource="mapper/UserInfoMapper.xml" />
         <mapper resource="mapper/OrderMapper.xml" />
         <mapper resource="mapper/OrderDetailMapper.xml" />
+        <mapper resource="mapper/ItemMapper.xml" />
     </mappers>
 </configuration>

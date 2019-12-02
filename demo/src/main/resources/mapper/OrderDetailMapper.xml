@@ -11,6 +11,7 @@
         <result column="total_price" property="totalPrice" />
         <result column="item_id" property="itemId" />
         <result column="status" property="status" />
+        <result column="item" property="item" typeHandler="dev.fvames.typehandlers.ItemTypeHandler" />
     </resultMap>
 
     <resultMap id="OrderDetailAndItemResultMap" type="OrderDetail">
@@ -27,5 +28,18 @@
         select * from order_detail
         where order_id = #{orderId}
     </select>
+
+    <select id="selectById" resultMap="OrderDetailResultMap">
+        select * from order_detail where id = #{id}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="Item">
+        insert into order_detail(
+        id, order_id, total_price, item_id, item, status
+        )
+        values(
+        #{id}, #{orderId}, #{totalPrice}, #{itemId}, #{item, typeHandler=dev.fvames.typehandlers.ItemTypeHandler}, #{status}
+        )
+    </insert>
 
 </mapper>

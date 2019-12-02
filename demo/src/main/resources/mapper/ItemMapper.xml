@@ -17,4 +17,19 @@
         where t.id = #{id}
     </select>
 
+    <insert id="insert" parameterType="Item" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into tb_item(
+        id,
+        item_name,
+        item_price,
+        item_detail
+        )
+        values(
+        #{id},
+        #{itemName},
+        #{itemPrice},
+        #{itemDetail}
+        )
+    </insert>
+
 </mapper>

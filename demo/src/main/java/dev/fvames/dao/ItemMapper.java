@@ -1,5 +1,6 @@
 package dev.fvames.dao;
 
+import dev.fvames.domain.Item;
 import dev.fvames.domain.Order;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,4 +14,6 @@ import org.apache.ibatis.annotations.Param;
 public interface ItemMapper {
 
 	Order selectById(@Param("id") String id);
+
+	Integer insert(Item item);
 }

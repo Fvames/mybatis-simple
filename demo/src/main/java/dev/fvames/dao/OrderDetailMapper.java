@@ -13,4 +13,8 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderDetailMapper {
 
 	OrderDetail selectByOrderId(@Param("orderId") Long orderId);
+
+	OrderDetail selectById(@Param("id") Long id);
+
+	int insert(OrderDetail orderDetail);
 }
