@@ -20,6 +20,8 @@
         <setting name="lazyLoadingEnabled" value="true" />
         <!--  获取任意属性值时都会加载其他延迟属性  -->
         <setting name="aggressiveLazyLoading" value="false" />
+        <!--  设置默认的执行器  -->
+        <setting name="defaultExecutorType" value="BATCH" />
     </settings>
     
     <typeAliases>

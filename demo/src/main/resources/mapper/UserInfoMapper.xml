@@ -88,6 +88,20 @@
         )
     </insert>
 
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" keyColumn="id" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into user_info( user_name, age, sex, birthday, password, user_type, enabled, real_name, qq,
+        email, tel, created, updated )
+        values
+        <foreach collection="list" item="item" separator="," >
+        ( #{item.userName}, #{item.age}, #{item.sex}, #{item.birthday}, #{item.password}, #{item.userType},
+          #{item.enabled}, #{item.realName}, #{item.qq}, #{item.email}, #{item.tel}, #{item.created}, #{item.updated}
+        )
+        </foreach>
+    </insert>
+
     <update id="update">
         update user_info
         <trim prefix="set" suffixOverrides=",">
@@ -106,6 +120,66 @@
             <if test="updated != null"> updated = #{updated}, </if>
         </trim>
         where id = #{id}
+    </update>
+
+    <update id="batchUpdate">
+        update user_info set
+        user_name =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.userName}
+        </foreach>
+        , age =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.age}
+        </foreach>
+        , sex =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.sex}
+        </foreach>
+        , birthday =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.birthday}
+        </foreach>
+        , password =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.password}
+        </foreach>
+        , user_type =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.userType}
+        </foreach>
+        , enabled =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.enabled}
+        </foreach>
+        , real_name =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.realName}
+        </foreach>
+        , qq =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.qq}
+        </foreach>
+        , email =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.email}
+        </foreach>
+        , tel =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.tel}
+        </foreach>
+        , created =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.created}
+        </foreach>
+        , updated =
+        <foreach collection="list" item="item" open="case id" close="end">
+            when #{item.id} then #{item.updated}
+        </foreach>
+        where id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
     </update>
 
     <delete id="deleteById">

@@ -25,4 +25,8 @@ public interface UserInfoMapper {
 	public void deleteById(Long id);
 
 	public UserInfo selectByUserNameAndPassword(@Param(value = "userName") String userName, @Param(value = "password") String password);
+
+	public void batchInsert(List<UserInfo> infoList);
+	public void batchUpdate(List<UserInfo> infoList);
+
 }

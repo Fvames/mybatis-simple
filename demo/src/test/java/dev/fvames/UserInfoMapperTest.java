@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -132,6 +133,54 @@ public class UserInfoMapperTest {
 
 		// Cache Hit Ratio 0.5(无全局设置时命中)
 		userInfoMapper.selectById(1L);
+	}
+
+	@Test
+	public void batchInsert() {
+		List<UserInfo> userInfos = new ArrayList<>();
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUserName("卡罗拉");
+		userInfo.setAge(31);
+		userInfo.setBirthday(LocalDate.of(1983, 2, 15));
+		userInfo.setEmail("kaluola@gmail.com");
+		userInfo.setSex(1);
+		userInfos.add(userInfo);
+		//userInfoMapper.insert(userInfo);
+
+		userInfo = new UserInfo();
+		userInfo.setUserName("霍兹");
+		userInfo.setAge(51);
+		userInfo.setBirthday(LocalDate.of(1963, 11, 25));
+		userInfo.setEmail("huozi@gmail.com");
+		userInfo.setSex(1);
+		userInfos.add(userInfo);
+		//userInfoMapper.insert(userInfo);
+
+		userInfoMapper.batchInsert(userInfos);
+	}
+
+	@Test
+	public void batchUpdate() {
+		List<UserInfo> userInfos = new ArrayList<>();
+		UserInfo userInfo = new UserInfo();
+		userInfo.setId(1L);
+		userInfo.setUserName("卡罗拉");
+		userInfo.setAge(31);
+		userInfo.setBirthday(LocalDate.of(1983, 2, 15));
+		userInfo.setEmail("kaluola@gmail.com");
+		userInfo.setSex(1);
+		userInfos.add(userInfo);
+
+		userInfo = new UserInfo();
+		userInfo.setId(2L);
+		userInfo.setUserName("霍兹");
+		userInfo.setAge(51);
+		userInfo.setBirthday(LocalDate.of(1963, 11, 25));
+		userInfo.setEmail("huozi@gmail.com");
+		userInfo.setSex(1);
+		userInfos.add(userInfo);
+
+		userInfoMapper.batchUpdate(userInfos);
 	}
 
 }
