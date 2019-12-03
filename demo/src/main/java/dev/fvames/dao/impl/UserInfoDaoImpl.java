@@ -22,26 +22,26 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 	@Override
 	public UserInfo selectById(Long id) {
-		return sqlSession.selectOne("UserInfoMapper.selectById", id);
+		return sqlSession.selectOne("UserInfoDaoMapper.selectById", id);
 	}
 
 	@Override
 	public List<UserInfo> selectAll() {
-		return sqlSession.selectList("UserInfoMapper.selectAll");
+		return sqlSession.selectList("UserInfoDaoMapper.selectAll");
 	}
 
 	@Override
 	public void insert(UserInfo userInfo) {
-		sqlSession.insert("UserInfoMapper.insert", userInfo);
+		sqlSession.insert("UserInfoDaoMapper.insert", userInfo);
 	}
 
 	@Override
 	public void update(UserInfo userInfo) {
-		sqlSession.update("UserInfoMapper.update", userInfo);
+		sqlSession.update("UserInfoDaoMapper.update", userInfo);
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		sqlSession.delete("UserInfoMapper.deleteById", id);
+		sqlSession.delete("UserInfoDaoMapper.deleteById", id);
 	}
 }
