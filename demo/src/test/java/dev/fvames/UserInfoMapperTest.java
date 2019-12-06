@@ -53,8 +53,17 @@ public class UserInfoMapperTest {
 
 	@Test
 	public void selectById() {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		UserInfoMapper userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
 		UserInfo userInfo = userInfoMapper.selectById(1L);
 		System.out.println(userInfo);
+		//sqlSession.close();
+
+		// todo 验证 redis 缓存
+		//SqlSession sqlSession1 = sqlSessionFactory.openSession();
+		//UserInfoMapper userInfoMapper1 = sqlSession1.getMapper(UserInfoMapper.class);
+		UserInfo userInfo1 = userInfoMapper.selectById(1L);
+		System.out.println(userInfo1);
 	}
 
 	@Test
@@ -68,16 +77,23 @@ public class UserInfoMapperTest {
 
 	@Test
 	public void update() {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		UserInfoMapper userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
+
 		UserInfo userInfo = new UserInfo();
 		userInfo.setId(1L);
-		userInfo.setUserName("斯通纳");
-		userInfo.setAge(40);
+		userInfo.setUserName("斯通纳7");
+		userInfo.setAge(47);
 		userInfo.setBirthday(LocalDate.of(1979, 3, 15));
 		userInfo.setEmail("sitongna@gmail.com");
 		userInfo.setSex(1);
 
 		userInfoMapper.update(userInfo);
+		sqlSession.commit();
 
+		SqlSession sqlSession1 = sqlSessionFactory.openSession();
+		UserInfoMapper userInfoMapper1 = sqlSession.getMapper(UserInfoMapper.class);
+		userInfoMapper1.selectById(1L);
 		System.out.println(userInfo);
 	}
 
@@ -124,7 +140,9 @@ public class UserInfoMapperTest {
 	@Test
 	public void twoCache() {
 		userInfoMapper.selectById(1L);
+		// 关闭或者commit后才会写入缓存
 		sqlSession.close();
+		//sqlSession.commit();
 		// 执行报错
 		//userInfoMapper.selectById(1L);
 

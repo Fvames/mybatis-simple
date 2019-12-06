@@ -12,6 +12,8 @@
          只读设置,默认 false, 可读写时需要返回缓存对象的拷贝(通过序列化),这样会慢一些,但是安全
     -->
     <!--<cache eviction="FIFO" flushInterval="6000" size="1024" blocking="" readOnly="true" />-->
+    <cache eviction="FIFO" flushInterval="6000" size="1024" blocking="" readOnly="true"
+        type="org.mybatis.caches.redis.RedisCache"/>
 
     <resultMap id="UserInfoMapper" type="UserInfo">
         <id column="id" property="id" />
