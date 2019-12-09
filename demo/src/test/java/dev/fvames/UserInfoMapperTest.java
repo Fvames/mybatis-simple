@@ -57,12 +57,12 @@ public class UserInfoMapperTest {
 		UserInfoMapper userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
 		UserInfo userInfo = userInfoMapper.selectById(1L);
 		System.out.println(userInfo);
-		//sqlSession.close();
+		//sqlSession.commit();
+		sqlSession.close();
 
-		// todo 验证 redis 缓存
-		//SqlSession sqlSession1 = sqlSessionFactory.openSession();
-		//UserInfoMapper userInfoMapper1 = sqlSession1.getMapper(UserInfoMapper.class);
-		UserInfo userInfo1 = userInfoMapper.selectById(1L);
+		SqlSession sqlSession1 = sqlSessionFactory.openSession();
+		UserInfoMapper userInfoMapper1 = sqlSession1.getMapper(UserInfoMapper.class);
+		UserInfo userInfo1 = userInfoMapper1.selectById(1L);
 		System.out.println(userInfo1);
 	}
 
