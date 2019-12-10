@@ -11,6 +11,7 @@
     <modules>
         <module>bak-code</module>
         <module>demo</module>
+        <module>spring-mybatis</module>
     </modules>
 
     <name>mybatis-simple</name>
